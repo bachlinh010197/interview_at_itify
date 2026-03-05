@@ -1,0 +1,44 @@
+﻿* Địa chỉ: 89 Thái Phiên, Phường Hải Châu, TP Đà Nẵng
+* SĐT: 0396904411
+
+
+Middle/Senior Full Stack Software Engineer
+
+
+About the job:
+We are seeking an experienced Middle/Senior Full Stack Engineer to join our team. We desire someone passionate about building and testing software. In this role, you'll tackle challenging problems, engage with the latest technology stack, and collaborate with skilled engineers to make significant impacts.
+Responsibilities:
+* Design, build, deploy & maintain high-performance web applications and APIs to ensure seamless operation.
+* Design client-side and server-side architecture
+* Write high-quality code, including comprehensive unit, functional, and end-to-end tests.
+* Participate in technical prototyping, technical design & code review.
+* Collaborate with team members to communicate and negotiate technical solutions and architectural designs.
+* Lead technical initiatives and integrate efforts across teams and products.
+Requirements:
+* 3-4 years of practical experience developing modern web applications within a software development team and successfully deploying products into production.
+* Excellent understanding of computer science fundamentals, data structures, and algorithms.
+* Extensive experience in building projects with high traffic and data queries
+* Understanding Caching at Different Layers
+* Deep understanding of the value of dependency injection and testing.
+* Solid coding practices, including writing technical specifications, peer code review, and unit & integration testing.
+* Positive and solution-oriented mindset.
+* Self-motivated & self-managing, with strong organizational skills.
+* Effective communication skills: Regularly achieve consensus with peers and provide clear status updates.
+* An inclination towards communication, inclusion, and visibility.
+* Share your knowledge with your colleagues
+Techstack:
+* Back-end: Python, NodeJS
+* Front-end: JavaScript, TypeScript, React
+* Database: PostgreSQL, MySQL, Redis
+* Hosted: AWS, GCP, Self-hosted
+Benefits:
+* Company trips and mini-trips 2-3 times per year, birthday celebrations, Mid-Autumn Festival,...
+* Performance-based bonuses (every 3 months).
+* Premium health insurance for employees 
+* Basic social insurance, health insurance, and other statutory benefits.
+* Opportunities for career advancement and professional development.
+* Dynamic, friendly, and professional working environment.
+* Salary commensurate with skills, with an unlimited salary range.
+
+
+* Sending your CV to nhintt@itify.net with the subject: [Full stack] - [Fullname]
