@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { UserEntity } from '../../domain/user.entity.js';
 import { type UserRepositoryPort } from '../../domain/user-repository.port.js';
 import { UserOrmEntity } from './user.orm-entity.js';
+import { Role } from '../../domain/role.enum.js';
 
 @Injectable()
 export class UserRepositoryAdapter implements UserRepositoryPort {
@@ -16,6 +17,7 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
     const ormEntity = this.repository.create({
       email: user.email,
       password: user.password,
+      role: user.role ?? Role.USER,
     });
     const saved = await this.repository.save(ormEntity);
     return this.toDomain(saved);
@@ -36,6 +38,7 @@ export class UserRepositoryAdapter implements UserRepositoryPort {
       id: orm.id,
       email: orm.email,
       password: orm.password,
+      role: orm.role,
       createdAt: orm.createdAt,
     });
   }

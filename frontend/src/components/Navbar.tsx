@@ -11,7 +11,10 @@ function Navbar() {
         <div className="nav-actions">
           {user ? (
             <>
-              <span className="nav-email">{user.email}</span>
+              <span className="nav-email">
+                {user.email}
+                <span className="role-badge">{user.role}</span>
+              </span>
               <button type="button" className="btn btn-small" onClick={logout}>
                 Logout
               </button>

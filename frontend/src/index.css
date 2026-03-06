@@ -452,3 +452,15 @@ tbody tr:last-child td {
 .auth-footer a:hover {
   text-decoration: underline;
 }
+
+.role-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: uppercase;
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}

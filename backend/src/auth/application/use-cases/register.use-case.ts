@@ -2,6 +2,7 @@ import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UserEntity } from '../../domain/user.entity.js';
 import { type UserRepositoryPort, USER_REPOSITORY_PORT } from '../../domain/user-repository.port.js';
+import { Role } from '../../domain/role.enum.js';
 
 @Injectable()
 export class RegisterUseCase {
@@ -17,7 +18,7 @@ export class RegisterUseCase {
     }
 
     const hashedPassword = await bcrypt.hash(input.password, 10);
-    const user = new UserEntity({ email: input.email, password: hashedPassword });
+    const user = new UserEntity({ email: input.email, password: hashedPassword, role: Role.USER });
     const saved = await this.userRepository.save(user);
 
     const { password, ...result } = saved;
