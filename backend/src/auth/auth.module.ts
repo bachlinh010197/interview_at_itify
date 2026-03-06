@@ -10,6 +10,7 @@ import { RegisterUseCase } from './application/use-cases/register.use-case.js';
 import { LoginUseCase } from './application/use-cases/login.use-case.js';
 import { AuthController } from './auth.controller.js';
 import { JwtStrategy } from './jwt.strategy.js';
+import { RolesGuard } from './roles.guard.js';
 
 @Module({
   imports: [
@@ -35,6 +36,6 @@ import { JwtStrategy } from './jwt.strategy.js';
     // Strategy
     JwtStrategy,
   ],
-  exports: [JwtStrategy, JwtModule, PassportModule],
+  exports: [JwtStrategy, JwtModule, PassportModule, RolesGuard],
 })
 export class AuthModule {}

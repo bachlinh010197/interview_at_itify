@@ -28,7 +28,7 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(JwtAuthGuard)
-  async me(@Request() req: { user: { id: number; email: string } }) {
+  async me(@Request() req: { user: { id: number; email: string; role: string } }) {
     const user = await this.userRepository.findById(req.user.id);
     if (!user) {
       return null;

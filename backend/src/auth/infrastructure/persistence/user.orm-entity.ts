@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   Index,
 } from 'typeorm';
+import { Role } from '../../domain/role.enum.js';
 
 @Entity('users')
 export class UserOrmEntity {
@@ -17,6 +18,9 @@ export class UserOrmEntity {
 
   @Column()
   password: string;
+
+  @Column({ type: 'varchar', length: 20, default: Role.USER })
+  role: Role;
 
   @CreateDateColumn()
   createdAt: Date;
