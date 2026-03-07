@@ -35,6 +35,9 @@ import { RolesGuard } from './roles.guard.js';
 
     // Strategy
     JwtStrategy,
+
+    // Guards
+    RolesGuard,
   ],
   exports: [JwtStrategy, JwtModule, PassportModule, RolesGuard],
 })

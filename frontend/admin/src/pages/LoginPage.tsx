@@ -1,7 +1,105 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+
+/* ── Styled Components ── */
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+`;
+
+const Card = styled.div`
+  width: 100%;
+  max-width: 420px;
+  background: ${({ theme }) => theme.colors.surface};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radius};
+  padding: 1.5rem;
+  box-shadow: ${({ theme }) => theme.shadow};
+`;
+
+const Title = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: 0.25rem;
+`;
+
+const Subtitle = styled.p`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.textSecondary};
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  input {
+    padding: 0.65rem 0.85rem;
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: ${({ theme }) => theme.colors.inputBg};
+    color: ${({ theme }) => theme.colors.text};
+    transition: border-color 0.15s;
+
+    &:focus {
+      outline: none;
+      border-color: ${({ theme }) => theme.colors.primary};
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+  }
+`;
+
+const SubmitBtn = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: ${({ theme }) => theme.colors.primary};
+  color: #fff;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: ${({ theme }) => theme.colors.primaryHover};
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+/* ── Component ── */
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -32,12 +130,12 @@ function LoginPage() {
   };
 
   return (
-    <div className="container auth-container">
-      <div className="card auth-card">
-        <h2 className="auth-title">Admin Sign In</h2>
-        <p className="auth-subtitle">Access the admin dashboard</p>
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
+    <Container>
+      <Card>
+        <Title>Admin Sign In</Title>
+        <Subtitle>Access the admin dashboard</Subtitle>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -47,8 +145,8 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </div>
-          <div className="form-group">
+          </FormGroup>
+          <FormGroup>
             <label htmlFor="password">Password</label>
             <input
               id="password"
@@ -58,13 +156,13 @@ function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </div>
-          <button type="submit" className="btn btn-primary auth-btn" disabled={loading}>
+          </FormGroup>
+          <SubmitBtn type="submit" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
-      </div>
-    </div>
+          </SubmitBtn>
+        </Form>
+      </Card>
+    </Container>
   );
 }
 
