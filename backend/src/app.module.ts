@@ -9,6 +9,8 @@ import { KeyvAdapter } from 'cache-manager';
 import { redisStore } from 'cache-manager-ioredis-yet';
 import { AuthModule } from './auth/auth.module.js';
 import { UserOrmEntity } from './auth/infrastructure/persistence/user.orm-entity.js';
+import { VehicleModule } from './vehicle/vehicle.module.js';
+import { VehicleOrmEntity } from './vehicle/infrastructure/persistence/vehicle.orm-entity.js';
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { UserOrmEntity } from './auth/infrastructure/persistence/user.orm-entity
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [UserOrmEntity],
+        entities: [UserOrmEntity, VehicleOrmEntity],
         synchronize: true,
       }),
     }),
@@ -49,6 +51,7 @@ import { UserOrmEntity } from './auth/infrastructure/persistence/user.orm-entity
     }),
 
     AuthModule,
+    VehicleModule,
   ],
   providers: [
     {

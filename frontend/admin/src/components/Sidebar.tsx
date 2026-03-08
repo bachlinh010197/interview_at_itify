@@ -34,6 +34,13 @@ const menuItems: MenuItem[] = [
       { label: 'API Keys', path: '/settings/api-keys', icon: '🔑' },
     ],
   },
+  {
+    label: '送迎関連',
+    icon: '🚐',
+    children: [
+      { label: '車両管理', path: '/vehicle', icon: '🚗' },
+    ],
+  },
 ];
 
 /* ── Styled Components ── */

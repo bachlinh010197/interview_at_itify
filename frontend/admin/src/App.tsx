@@ -9,6 +9,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
+import VehicleListPage from './pages/VehicleListPage';
+import VehicleCreatePage from './pages/VehicleCreatePage';
+import VehicleEditPage from './pages/VehicleEditPage';
 
 const Layout = styled.div`
   display: flex;
@@ -37,6 +40,9 @@ function AppLayout() {
           <Main>
             <Routes>
               <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+              <Route path="/vehicle" element={<ProtectedRoute><VehicleListPage /></ProtectedRoute>} />
+              <Route path="/vehicle/create" element={<ProtectedRoute><VehicleCreatePage /></ProtectedRoute>} />
+              <Route path="/vehicle/:id" element={<ProtectedRoute><VehicleEditPage /></ProtectedRoute>} />
             </Routes>
           </Main>
         </Layout>
@@ -53,7 +59,7 @@ function AppLayout() {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
+      <GlobalStyles/>
       <BrowserRouter>
         <AuthProvider>
           <AppLayout />
