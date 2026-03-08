@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module.js';
 import { UserOrmEntity } from './auth/infrastructure/persistence/user.orm-entity.js';
 import { VehicleModule } from './vehicle/vehicle.module.js';
 import { VehicleOrmEntity } from './vehicle/infrastructure/persistence/vehicle.orm-entity.js';
+import { DriverModule } from './driver/driver.module.js';
+import { DriverOrmEntity } from './driver/infrastructure/persistence/driver.orm-entity.js';
 
 @Module({
   imports: [
@@ -26,7 +28,7 @@ import { VehicleOrmEntity } from './vehicle/infrastructure/persistence/vehicle.o
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [UserOrmEntity, VehicleOrmEntity],
+        entities: [UserOrmEntity, VehicleOrmEntity, DriverOrmEntity],
         synchronize: true,
       }),
     }),
@@ -52,6 +54,7 @@ import { VehicleOrmEntity } from './vehicle/infrastructure/persistence/vehicle.o
 
     AuthModule,
     VehicleModule,
+    DriverModule,
   ],
   providers: [
     {

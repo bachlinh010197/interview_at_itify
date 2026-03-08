@@ -5,21 +5,21 @@ import {
   Typography,
   TextField,
   Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
   Paper,
   Chip,
   IconButton,
   Collapse,
+  Select,
+  MenuItem,
+  FormControl,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CheckIcon from '@mui/icons-material/Check';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import toast from 'react-hot-toast';
-import { createVehicle } from '../api/vehicleApi';
-import type { CreateVehicleDto } from '../types/vehicle';
+import { createDriver } from '../../api/driverApi';
+import type { CreateDriverDto } from '../../types/driver';
 
 const RequiredBadge = () => (
   <Chip
@@ -35,34 +35,43 @@ const RequiredBadge = () => (
   />
 );
 
-function VehicleCreatePage() {
+const LICENSE_TYPES = [
+  '普通自動車免許',
+  '準中型自動車免許',
+  '中型自動車免許',
+  '大型自動車免許',
+];
+
+function DriverCreatePage() {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [form, setForm] = useState<CreateVehicleDto>({
+  const [form, setForm] = useState<CreateDriverDto>({
     name: '',
-    numberPlate: '',
-    seatCount: 0,
-    hasWheelchair: false,
-    responsible: '',
+    phone: '',
+    address: '',
+    licenseNumber: '',
+    licenseType: '',
+    licenseIssuedDate: '',
+    licenseExpiryDate: '',
   });
 
-  const handleChange = (field: keyof CreateVehicleDto, value: string | number | boolean) => {
+  const handleChange = (field: keyof CreateDriverDto, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSave = async () => {
-    if (!form.name || !form.numberPlate || !form.responsible) {
+    if (!form.name || !form.licenseNumber || !form.licenseType || !form.licenseIssuedDate || !form.licenseExpiryDate) {
       toast.error('必須項目を入力してください');
       return;
     }
     setSaving(true);
     try {
-      await createVehicle(form);
-      toast.success('車両を作成しました');
-      navigate('/vehicle');
+      await createDriver(form);
+      toast.success('運転者を作成しました');
+      navigate('/driver');
     } catch {
-      toast.error('車両の作成に失敗しました');
+      toast.error('運転者の作成に失敗しました');
     } finally {
       setSaving(false);
     }
@@ -72,17 +81,17 @@ function VehicleCreatePage() {
     <Box sx={{ p: 3 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <IconButton onClick={() => navigate('/vehicle')}>
+          <IconButton onClick={() => navigate('/driver')}>
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h5" fontWeight={700}>
-            車両情報
+            運転者情報
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
             variant="outlined"
-            onClick={() => navigate('/vehicle')}
+            onClick={() => navigate('/driver')}
             sx={{ textTransform: 'none', color: '#666', borderColor: '#ccc' }}
           >
             キャンセル
@@ -133,7 +142,7 @@ function VehicleCreatePage() {
           >
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Typography variant="body2" fontWeight={600}>車両名</Typography>
+                <Typography variant="body2" fontWeight={600}>運転者名</Typography>
                 <RequiredBadge />
               </Box>
               <TextField
@@ -146,58 +155,88 @@ function VehicleCreatePage() {
 
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Typography variant="body2" fontWeight={600}>ナンバープレート</Typography>
-                <RequiredBadge />
+                <Typography variant="body2" fontWeight={600}>電話番号</Typography>
               </Box>
               <TextField
                 fullWidth
                 size="small"
-                value={form.numberPlate}
-                onChange={(e) => handleChange('numberPlate', e.target.value)}
+                value={form.phone}
+                onChange={(e) => handleChange('phone', e.target.value)}
+              />
+            </Box>
+
+            <Box sx={{ gridColumn: '1 / -1' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <Typography variant="body2" fontWeight={600}>住所</Typography>
+              </Box>
+              <TextField
+                fullWidth
+                size="small"
+                multiline
+                rows={3}
+                value={form.address}
+                onChange={(e) => handleChange('address', e.target.value)}
               />
             </Box>
 
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Typography variant="body2" fontWeight={600}>座席数</Typography>
+                <Typography variant="body2" fontWeight={600}>免許証番号</Typography>
                 <RequiredBadge />
               </Box>
               <TextField
                 fullWidth
                 size="small"
-                type="number"
-                value={form.seatCount}
-                onChange={(e) => handleChange('seatCount', Number(e.target.value))}
-                slotProps={{ htmlInput: { min: 0 } }}
+                value={form.licenseNumber}
+                onChange={(e) => handleChange('licenseNumber', e.target.value)}
               />
             </Box>
 
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Typography variant="body2" fontWeight={600}>責任者</Typography>
+                <Typography variant="body2" fontWeight={600}>免許種類</Typography>
+                <RequiredBadge />
+              </Box>
+              <FormControl fullWidth size="small">
+                <Select
+                  value={form.licenseType}
+                  onChange={(e) => handleChange('licenseType', e.target.value)}
+                  displayEmpty
+                >
+                  <MenuItem value="" disabled>選択してください</MenuItem>
+                  {LICENSE_TYPES.map((type) => (
+                    <MenuItem key={type} value={type}>{type}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+
+            <Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                <Typography variant="body2" fontWeight={600}>免許交付日</Typography>
                 <RequiredBadge />
               </Box>
               <TextField
                 fullWidth
                 size="small"
-                value={form.responsible}
-                onChange={(e) => handleChange('responsible', e.target.value)}
+                type="date"
+                value={form.licenseIssuedDate}
+                onChange={(e) => handleChange('licenseIssuedDate', e.target.value)}
               />
             </Box>
 
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                <Typography variant="body2" fontWeight={600}>車椅子</Typography>
+                <Typography variant="body2" fontWeight={600}>免許有効期限</Typography>
                 <RequiredBadge />
               </Box>
-              <RadioGroup
-                row
-                value={form.hasWheelchair ? 'true' : 'false'}
-                onChange={(e) => handleChange('hasWheelchair', e.target.value === 'true')}
-              >
-                <FormControlLabel value="false" control={<Radio size="small" />} label="なし" />
-                <FormControlLabel value="true" control={<Radio size="small" />} label="あり" />
-              </RadioGroup>
+              <TextField
+                fullWidth
+                size="small"
+                type="date"
+                value={form.licenseExpiryDate}
+                onChange={(e) => handleChange('licenseExpiryDate', e.target.value)}
+              />
             </Box>
           </Box>
         </Collapse>
@@ -206,4 +245,4 @@ function VehicleCreatePage() {
   );
 }
 
-export default VehicleCreatePage;
+export default DriverCreatePage;

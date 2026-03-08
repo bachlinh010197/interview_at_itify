@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -12,15 +12,14 @@ import {
   Chip,
   IconButton,
   Collapse,
-  CircularProgress,
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CheckIcon from '@mui/icons-material/Check';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import toast from 'react-hot-toast';
-import { getVehicle, updateVehicle } from '../api/vehicleApi';
-import type { CreateVehicleDto } from '../types/vehicle';
+import { createVehicle } from '../../api/vehicleApi';
+import type { CreateVehicleDto } from '../../types/vehicle';
 
 const RequiredBadge = () => (
   <Chip
@@ -36,11 +35,9 @@ const RequiredBadge = () => (
   />
 );
 
-function VehicleEditPage() {
+function VehicleCreatePage() {
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
   const [expanded, setExpanded] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [form, setForm] = useState<CreateVehicleDto>({
     name: '',
@@ -49,28 +46,6 @@ function VehicleEditPage() {
     hasWheelchair: false,
     responsible: '',
   });
-
-  useEffect(() => {
-    const fetchVehicle = async () => {
-      try {
-        const res = await getVehicle(Number(id));
-        const v = res.data;
-        setForm({
-          name: v.name,
-          numberPlate: v.numberPlate,
-          seatCount: v.seatCount,
-          hasWheelchair: v.hasWheelchair,
-          responsible: v.responsible,
-        });
-      } catch {
-        toast.error('車両情報の取得に失敗しました');
-        navigate('/vehicle');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchVehicle();
-  }, [id, navigate]);
 
   const handleChange = (field: keyof CreateVehicleDto, value: string | number | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -83,23 +58,15 @@ function VehicleEditPage() {
     }
     setSaving(true);
     try {
-      await updateVehicle(Number(id), form);
-      toast.success('車両を更新しました');
+      await createVehicle(form);
+      toast.success('車両を作成しました');
       navigate('/vehicle');
     } catch {
-      toast.error('車両の更新に失敗しました');
+      toast.error('車両の作成に失敗しました');
     } finally {
       setSaving(false);
     }
   };
-
-  if (loading) {
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 400 }}>
-        <CircularProgress />
-      </Box>
-    );
-  }
 
   return (
     <Box sx={{ p: 3 }}>
@@ -239,4 +206,4 @@ function VehicleEditPage() {
   );
 }
 
-export default VehicleEditPage;
+export default VehicleCreatePage;

@@ -39,6 +39,7 @@ const menuItems: MenuItem[] = [
     icon: '🚐',
     children: [
       { label: '車両管理', path: '/vehicle', icon: '🚗' },
+      { label: '運転者管理', path: '/driver', icon: '🪪' },
     ],
   },
 ];

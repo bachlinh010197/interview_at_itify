@@ -7,11 +7,14 @@ import GlobalStyles from './styles/GlobalStyles';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Sidebar from './components/Sidebar';
-import LoginPage from './pages/LoginPage';
-import DashboardPage from './pages/DashboardPage';
-import VehicleListPage from './pages/VehicleListPage';
-import VehicleCreatePage from './pages/VehicleCreatePage';
-import VehicleEditPage from './pages/VehicleEditPage';
+import LoginPage from './pages/auth/LoginPage';
+import DashboardPage from './pages/dashboard/DashboardPage';
+import VehicleListPage from './pages/vehicle/VehicleListPage';
+import VehicleCreatePage from './pages/vehicle/VehicleCreatePage';
+import VehicleEditPage from './pages/vehicle/VehicleEditPage';
+import DriverListPage from './pages/driver/DriverListPage';
+import DriverCreatePage from './pages/driver/DriverCreatePage';
+import DriverEditPage from './pages/driver/DriverEditPage';
 
 const Layout = styled.div`
   display: flex;
@@ -43,6 +46,9 @@ function AppLayout() {
               <Route path="/vehicle" element={<ProtectedRoute><VehicleListPage /></ProtectedRoute>} />
               <Route path="/vehicle/create" element={<ProtectedRoute><VehicleCreatePage /></ProtectedRoute>} />
               <Route path="/vehicle/:id" element={<ProtectedRoute><VehicleEditPage /></ProtectedRoute>} />
+              <Route path="/driver" element={<ProtectedRoute><DriverListPage /></ProtectedRoute>} />
+              <Route path="/driver/create" element={<ProtectedRoute><DriverCreatePage /></ProtectedRoute>} />
+              <Route path="/driver/:id" element={<ProtectedRoute><DriverEditPage /></ProtectedRoute>} />
             </Routes>
           </Main>
         </Layout>

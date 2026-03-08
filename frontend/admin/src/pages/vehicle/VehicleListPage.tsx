@@ -18,9 +18,9 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import toast from 'react-hot-toast';
-import { vehiclesAtom, vehiclesLoadingAtom, vehicleSearchAtom } from '../atoms/vehicleAtoms';
-import { getVehicles } from '../api/vehicleApi';
-import { theme } from '../styles/theme';
+import { vehiclesAtom, vehiclesLoadingAtom, vehicleSearchAtom } from '../../atoms/vehicleAtoms';
+import { getVehicles } from '../../api/vehicleApi';
+import { theme } from '../../styles/theme';
 
 function VehicleListPage() {
   const navigate = useNavigate();
