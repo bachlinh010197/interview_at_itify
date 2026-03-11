@@ -15,6 +15,9 @@ import VehicleEditPage from './pages/vehicle/VehicleEditPage';
 import DriverListPage from './pages/driver/DriverListPage';
 import DriverCreatePage from './pages/driver/DriverCreatePage';
 import DriverEditPage from './pages/driver/DriverEditPage';
+import SougeiScheduleListPage from './pages/sougei-schedule/SougeiScheduleListPage';
+import SougeiScheduleCreatePage from './pages/sougei-schedule/SougeiScheduleCreatePage';
+import SougeiScheduleEditPage from './pages/sougei-schedule/SougeiScheduleEditPage';
 
 const Layout = styled.div`
   display: flex;
@@ -49,6 +52,9 @@ function AppLayout() {
               <Route path="/driver" element={<ProtectedRoute><DriverListPage /></ProtectedRoute>} />
               <Route path="/driver/create" element={<ProtectedRoute><DriverCreatePage /></ProtectedRoute>} />
               <Route path="/driver/:id" element={<ProtectedRoute><DriverEditPage /></ProtectedRoute>} />
+              <Route path="/sougei-schedule" element={<ProtectedRoute><SougeiScheduleListPage /></ProtectedRoute>} />
+              <Route path="/sougei-schedule/create" element={<ProtectedRoute><SougeiScheduleCreatePage /></ProtectedRoute>} />
+              <Route path="/sougei-schedule/:id" element={<ProtectedRoute><SougeiScheduleEditPage /></ProtectedRoute>} />
             </Routes>
           </Main>
         </Layout>

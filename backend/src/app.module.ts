@@ -13,6 +13,8 @@ import { VehicleModule } from './vehicle/vehicle.module.js';
 import { VehicleOrmEntity } from './vehicle/infrastructure/persistence/vehicle.orm-entity.js';
 import { DriverModule } from './driver/driver.module.js';
 import { DriverOrmEntity } from './driver/infrastructure/persistence/driver.orm-entity.js';
+import { SougeiScheduleModule } from './sougei-schedule/sougei-schedule.module.js';
+import { SougeiScheduleOrmEntity } from './sougei-schedule/infrastructure/persistence/sougei-schedule.orm-entity.js';
 
 @Module({
   imports: [
@@ -28,7 +30,7 @@ import { DriverOrmEntity } from './driver/infrastructure/persistence/driver.orm-
         username: config.get<string>('DATABASE_USER'),
         password: config.get<string>('DATABASE_PASSWORD'),
         database: config.get<string>('DATABASE_NAME'),
-        entities: [UserOrmEntity, VehicleOrmEntity, DriverOrmEntity],
+        entities: [UserOrmEntity, VehicleOrmEntity, DriverOrmEntity, SougeiScheduleOrmEntity],
         synchronize: true,
       }),
     }),
@@ -55,6 +57,7 @@ import { DriverOrmEntity } from './driver/infrastructure/persistence/driver.orm-
     AuthModule,
     VehicleModule,
     DriverModule,
+    SougeiScheduleModule,
   ],
   providers: [
     {

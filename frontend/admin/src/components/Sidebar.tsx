@@ -40,6 +40,7 @@ const menuItems: MenuItem[] = [
     children: [
       { label: '車両管理', path: '/vehicle', icon: '🚗' },
       { label: '運転者管理', path: '/driver', icon: '🪪' },
+      { label: '送迎管理', path: '/sougei-schedule', icon: '📅' },
     ],
   },
 ];
